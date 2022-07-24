@@ -22,14 +22,14 @@ django-geoip2-extras==2.0.2
 django-countries==7.3.2
 django-geoip2-extras==2.0.2
 
-git+https://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@github.com/Pointer2VoidStar/django-moderation.git@main
-git+https://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@github.com/Pointer2VoidStar/django-reputation.git@main
-git+https://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@github.com/Pointer2VoidStar/django-contactus.git@main
-git+https://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@github.com/Pointer2VoidStar/django-pagerestrict.git@main
-git+https://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@github.com/Pointer2VoidStar/django-digital-payments.git@main
-git+https://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@github.com/Pointer2VoidStar/django-social.git@main
-git+https://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@github.com/Pointer2VoidStar/django-events.git@main
-git+https://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@github.com/Pointer2VoidStar/django-userprofile.git@main
-git+https://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@github.com/Pointer2VoidStar/django-blog.git@main
-git+https://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@github.com/Pointer2VoidStar/django-poll.git@main
-git+https://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@github.com/Pointer2VoidStar/django-forum.git@main
+git+https://@github.com/Pointer2VoidStar/django-moderation.git@main
+git+https://@github.com/Pointer2VoidStar/django-reputation.git@main
+git+https://@github.com/Pointer2VoidStar/django-contactus.git@main
+git+https://@github.com/Pointer2VoidStar/django-pagerestrict.git@main
+git+https://@github.com/Pointer2VoidStar/django-digital-payments.git@main
+git+https://@github.com/Pointer2VoidStar/django-social.git@main
+git+https://@github.com/Pointer2VoidStar/django-events.git@main
+git+https://@github.com/Pointer2VoidStar/django-userprofile.git@main
+git+https://@github.com/Pointer2VoidStar/django-blog.git@main
+git+https://@github.com/Pointer2VoidStar/django-poll.git@main
+git+https://@github.com/Pointer2VoidStar/django-forum.git@main

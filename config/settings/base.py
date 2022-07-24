@@ -208,7 +208,7 @@ TEMPLATES = [
                 "django.template.context_processors.static",
                 "django.template.context_processors.tz",
                 "django.contrib.messages.context_processors.messages",
-                "sample_project.users.context_processors.allauth_settings",
+                # "sample_project.users.context_processors.allauth_settings",
             ],
         },
     }
