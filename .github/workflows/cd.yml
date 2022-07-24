@@ -58,6 +58,6 @@ jobs:
       - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}  # store your api within github secrets
-          heroku_app_name: "sample-projectx" # Must be unique in Heroku
-          heroku_email: "o.enyioma@gmail.com"  # Your heroku login mail
+          heroku_app_name: "sample-something" # Must be unique in Heroku
+          heroku_email: "nc_osborne@hotmail.com"  # Your heroku login mail
           stack: "container"

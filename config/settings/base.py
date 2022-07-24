@@ -4,6 +4,7 @@ Base settings to build other settings files upon.
 from pathlib import Path
 
 import environ
+import os
 
 ROOT_DIR = Path(__file__).resolve(strict=True).parent.parent.parent
 # sample_project/
@@ -64,7 +65,7 @@ DJANGO_APPS = [
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
-    # "django.contrib.sites",
+    "django.contrib.sites",
     "django.contrib.messages",
     "django.contrib.staticfiles",
     # "django.contrib.humanize", # Handy template tags
@@ -77,10 +78,32 @@ THIRD_PARTY_APPS = [
     "allauth",
     "allauth.account",
     "allauth.socialaccount",
+
+
+    "geoip2",
+    'tinymce',
+    'pinax.images',
+    'taggit',
+    'djmoney',
+    "django_countries",   
+
+    'django_nyt',
+    'contactus',
+    'reputation',
+    'moderation',
+    'social',
+    'userprofile',
+    'events',
+    'blog',
+    'poll',
+    'forum',
+    'products',
+    'cart',
+
 ]
 
 LOCAL_APPS = [
-    "sample_project.users",
+    # "sample_project.users",
     # Your stuff: custom apps go here
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
@@ -99,7 +122,7 @@ AUTHENTICATION_BACKENDS = [
     "allauth.account.auth_backends.AuthenticationBackend",
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#auth-user-model
-AUTH_USER_MODEL = "users.User"
+AUTH_USER_MODEL = "userprofile.UserAccount"
 # https://docs.djangoproject.com/en/dev/ref/settings/#login-redirect-url
 LOGIN_REDIRECT_URL = "users:redirect"
 # https://docs.djangoproject.com/en/dev/ref/settings/#login-url
@@ -139,6 +162,7 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.common.BrokenLinkEmailsMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "geoip2_extras.middleware.GeoIP2Middleware",
 ]
 
 # STATIC
@@ -278,3 +302,227 @@ SOCIALACCOUNT_FORMS = {"signup": "sample_project.users.forms.UserSocialSignupFor
 
 # Your stuff...
 # ------------------------------------------------------------------------------
+
+
+SITE_ID = 1
+
+
+##############################
+# Page restrictions settings #
+##############################
+
+PAGE_RESTRICT_REDIRECT_URL='home:index'
+PAGE_RESTRICT_PAGE_IGNORES = ''
+PAGE_RESTRICT_PAGE_LIMIT = 10
+PAGE_RESTRICT_RESET_HOURS_DELAY = 4
+
+PAGE_RESTRICT_PERMISSION = 'home.has_site_membership'
+
+
+
+##############################################################
+# Moderation related settings                                #
+##############################################################
+
+MODERATED_OBJECTS = {
+    'apps': {
+        'userprofile' : {
+            'models': {
+                'UserAccount' : {
+                    'fields': ['bio', 'profile_pic', 'background_photo_pic', 'website']
+                },
+                'Interest' : {
+                    'fields': ['name']
+                },                
+            },
+        },
+
+       'poll' : {
+            'models': {
+                'PollCategory' : {
+                    'fields': ['name']
+                },
+                'Poll' : {
+                    'fields': ['question', 'teaser']
+                },                
+            },
+        },
+
+
+       'blog' : {
+            'models': {
+                'ArticleCategory' : {
+                    'fields': ['name', 'description']
+                },
+                'Article' : {
+                    'fields': ['title', 'teaser', 'content']
+                },                
+            },
+        },    
+
+
+       'forum' : {
+            'models': {
+                'Forum' : {
+                    'fields': ['name', 'description', 'picture', 'tags']
+                },
+                'Topic' : {
+                    'fields': ['subject']
+                },                
+            },
+        },            
+
+       'bookclub' : {
+            'models': {
+                'BookClub' : {
+                    'fields': ['name']
+                },              
+            },
+        },   
+
+       'learningcircle' : {
+            'models': {
+                'LearningCircle' : {
+                    'fields': ['name']
+                },              
+            },
+        },          
+
+    },
+}
+
+
+##############################################################
+# Contact Us related settings                                #
+##############################################################
+CONTACT_US = {
+    'reasons': (('Website feedback', 'Feedback on website'), ('Job enquiries', '') , ('General', '')),
+    'images': (('image1.jpg','Photo by <a href="https://unsplash.com/@lucaslenzi?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Lucas Lenzi</a> on Unsplash'), 
+               ('image2.jpg','Photo by <a href="https://unsplash.com/@charlesetoroma?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Charles Etoroma</a> on Unsplash'), 
+               ('image3.jpg','Photo by <a href="https://unsplash.com/@princearkman?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Prince Akachi</a> on Unsplash'),
+               ('image4.jpg','Photo by <a href="https://unsplash.com/@alexkixa?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Alexandre Debiève</a> on Unsplash'),
+               ('image5.jpg','Photo by <a href="https://unsplash.com/@steph?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Stephanie Liverani</a> on Unsplash'),
+               ('image6.jpg','Photo by <a href="https://unsplash.com/@jakenackos?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Jake Nackos</a> on Unsplash'),
+               ),
+    'randomize': True,
+}
+
+
+##############################################################
+# Reputation related settings                                #
+##############################################################
+REPUTATION = {
+    "levels": [
+        {
+            "name": "beginner",
+            "required_rep": 1,
+        },
+        {
+            "name": "intermediate",
+            "required_rep": 5000,
+        },
+        {
+            "name": "expert",
+            "required_rep": 100000,
+        },
+    ],
+    "badge_grades": [
+        {"name": "Platinum", "description": "Platimum badge", "position": 4},
+        {"name": "Gold", "description": "Gold badge", "position": 3},
+        {"name": "Silver", "description": "Silver badge", "position": 2},
+        {"name": "Bronze", "description": "Bronze badge", "position": 1},
+    ],
+    "apps": [
+            'blog',
+            'poll',
+            'forum',
+            'reputation',
+    ],
+}
+
+INITIAL_TAGS = [
+                'love',
+                'ibwagood',
+                'fashion',
+                'beautiful',
+                'art',
+                'happy',
+                'nature',
+                'travel',
+                'ubuntu',
+                'iabwa',
+                'style',
+                'repost',
+                'summer',
+                'ibwadaily',
+                'me',
+                'friends',
+                'food',
+                'fun',
+                'beauty',
+                'ibwalike',
+                'family',
+                'onelove',
+                'life',
+                'music',
+                'amazing',
+                'sunset',
+                'beach',
+                'ibwamood',
+                'motivation',
+                'facts',
+                ]
+
+###############################################
+# Blog related settings                       #
+###############################################
+BLOG_CATEGORIES=[
+                 'Lifestyle', 
+                 'Travel',
+                 'Food',
+                 'Health & Fitness',
+                 'Fashion & Beauty',
+                 'DIY & Craft',
+                 'Personal Finance',
+                 'Parenting',
+                 'Music',
+                 'Culture',
+                 'Philosophy',
+                 'Nature & Outdoors',
+                 'Technology',
+                 'Business',
+                 'Personal Development',
+                 'Personal'
+                 ] 
+
+
+BLOG_INITIAL_TAGS = INITIAL_TAGS + [
+
+]
+
+###############################################
+# Poll related settings                       #
+###############################################
+POLL_CATEGORIES=[
+                 'Lifestyle', 
+                 'Travel',
+                 'Food',
+                 'Health & Fitness',
+                 'Fashion & Beauty',
+                 'DIY & Craft',
+                 'Personal Finance',
+                 'Music',
+                 'Personal',
+                 'Parenting',
+                 'Fun & Trivia'
+                 ]                  
+
+
+POLL_INITIAL_TAGS  = INITIAL_TAGS + [
+    
+]
+
+GEOIP_PATH = os.path.join(ROOT_DIR, 'geodata')
+print(GEOIP_PATH)
+
+DEFAULT_CCY = 'GBP'

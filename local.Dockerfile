@@ -1,6 +1,8 @@
 # pull official base image
 FROM python:3.10.0-slim
 
+COPY .netrc /root/
+
 # set work directory
 WORKDIR /usr/src/app
 
@@ -18,8 +20,11 @@ ENV PYTHONUNBUFFERED 1
 RUN apt-get update && apt-get install -y \
     build-essential \
     libpq-dev \
+    git \
+    binutils \
+    libproj-dev \
+    gdal-bin \
     && rm -rf /var/lib/apt/lists/*
-
 
 
 # install dependencies
@@ -37,4 +42,4 @@ COPY . .
 
 EXPOSE 8000
 
-CMD ["bash", "-c", "python manage.py migrate && python manage.py runserver 0.0.0.0:8000"]
+CMD ["bash", "-c", "python manage.py makemigrations && python manage.py migrate && python manage.py runserver 0.0.0.0:8000"]

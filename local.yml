@@ -12,7 +12,7 @@ services:
     volumes:
       - ./:/usr/src/app/
     ports:
-      - 8000:8000
+      - 5000:8000
     env_file:
       - .envs/.local/.postgres
       - .envs/.local/.django
