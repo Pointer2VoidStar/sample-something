@@ -58,7 +58,7 @@ jobs:
       - uses: "finnp/create-file-action@master"
         env:
           FILE_NAME: "heroku.yml"
-          FILE_DATA:|
+          FILE_DATA: |
 "setup:\
   addons:\
     - plan: heroku-postgresql\
