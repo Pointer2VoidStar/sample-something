@@ -17,7 +17,7 @@ crispy-bootstrap5==0.6  # https://github.com/django-crispy-forms/crispy-bootstra
 django-redis==5.2.0  # https://github.com/jazzband/django-redis 
 django-nyt==1.2.2
 
-geoip2==3.0.0
+geoip2==4.6.0
 django-geoip2-extras==2.0.2
 django-countries==7.3.2
 django-geoip2-extras==2.0.2
