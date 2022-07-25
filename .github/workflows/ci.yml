@@ -43,6 +43,12 @@
           machine: github.com
           password: ${{ secrets.AUTH_TOKEN }}
 
+       - name: Install apt deps
+         run: |
+           sudo apt-add-repository ppa:ubuntugis/ubuntugis-unstable
+           sudo apt-get update
+           sudo apt-get install gdal-bin libgdal-dev
+
        - name: Set up Python
          uses: actions/setup-python@v3
          with:
