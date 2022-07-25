@@ -58,7 +58,7 @@ jobs:
       - uses: "finnp/create-file-action@master"
         env:
           FILE_NAME: "heroku.yml"
-          FILE_DATA: "{setup: {addons: [{plan: heroku-postgresql, as: DATABASE\}]}, build: {docker: {web: Dockerfile}, config: {DJANGO_SETTINGS_MODULE: config.settings.heroku, GITHUB_AUTH_TOKEN: ${{secrets.AUTH_TOKEN}}}}}"
+          FILE_DATA: "{setup: {addons: [{plan: heroku-postgresql, as: DATABASE}]}, build: {docker: {web: Dockerfile}, config: {DJANGO_SETTINGS_MODULE: config.settings.heroku, GITHUB_AUTH_TOKEN: ${{secrets.AUTH_TOKEN}}}}}"
       - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}  # store your api within github secrets
