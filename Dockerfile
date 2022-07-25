@@ -1,8 +1,6 @@
 # pull official base image
 FROM python:3.10.0-slim
 
-COPY .netrc /root/
-
 # set work directory
 WORKDIR /usr/src/app
 
