@@ -326,6 +326,8 @@ tags
 ### Project template
 sample_project/media/
 
+.netrc
+
 .pytest_cache/
 .env
 .envs/*
