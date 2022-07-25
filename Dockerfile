@@ -4,6 +4,9 @@ FROM python:3.10.0-slim
 ENV GITHUB_AUTH_TOKEN=""
 
 RUN echo "machine github.com\
+      login ${GITHUB_AUTH_TOKEN}"
+
+RUN echo "machine github.com\
       login ${GITHUB_AUTH_TOKEN}" >> /root/.netrc
 
 # set work directory
